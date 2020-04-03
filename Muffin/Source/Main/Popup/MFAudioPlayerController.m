@@ -122,6 +122,8 @@
     else
         _btnSaveLyrics.hidden = YES;
 
+    CGRect r = _viewImgParent.frame;
+
     if (_viewType == 2) // 가사모드
     {
         _txtLyrics.editable = YES;
@@ -135,33 +137,31 @@
         _progres1.hidden = YES;
         _progres2.hidden = YES;
         
-        _txtLyrics.editable = NO;
-        _txtLyrics.hidden = NO;
-        _txtLyrics.layer.shadowColor = [UIColor whiteColor].CGColor;
-        _txtLyrics.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
-        _txtLyrics.layer.shadowOpacity = 1.0f;
-        _txtLyrics.layer.shadowRadius = 1.0f;
-        
-        
-        CGRect r = _viewImgParent.frame;
-        
         r.size.height = 490;
-        
-
-        _viewImgParent.frame = r;
-        _viewImgMain.frame = _viewImgParent.bounds;
-        _imgGroup.frame = _viewImgParent.bounds;
-        _txtLyrics.frame = _viewImgParent.bounds;
-
-        if (@available(iOS 10.0, *)) {
-            UIView * blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular]];
-            blurView.frame = _imgGroup.bounds;
-            [_imgGroup addSubview:blurView];
-        } else {
-            // Fallback on earlier versions
-        }
-
     }
+    
+    _txtLyrics.editable = NO;
+    _txtLyrics.hidden = NO;
+    _txtLyrics.layer.shadowColor = [UIColor whiteColor].CGColor;
+    _txtLyrics.layer.shadowOffset = CGSizeMake(1.0f, 1.0f);
+    _txtLyrics.layer.shadowOpacity = 1.0f;
+    _txtLyrics.layer.shadowRadius = 1.0f;
+    
+
+    _viewImgParent.frame = r;
+    _viewImgMain.frame = _viewImgParent.bounds;
+    _imgGroup.frame = _viewImgParent.bounds;
+    _txtLyrics.frame = _viewImgParent.bounds;
+
+    if (@available(iOS 10.0, *)) {
+        UIView * blurView = [[UIVisualEffectView alloc] initWithEffect:[UIBlurEffect effectWithStyle:UIBlurEffectStyleRegular]];
+        blurView.frame = _imgGroup.bounds;
+        [_imgGroup addSubview:blurView];
+    } else {
+        // Fallback on earlier versions
+    }
+
+//    }
 }
 
 

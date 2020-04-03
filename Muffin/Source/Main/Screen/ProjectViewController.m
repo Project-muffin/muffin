@@ -66,6 +66,8 @@
     
     NSString * uploadFileTitle;
     NSString * uploadFileName;
+    
+    NSString * curSongWords;
 }
 
 @end
@@ -212,8 +214,11 @@
                                                {
                                                    SongInfo * muffin = [[SongInfo alloc] initWithData:dic];
                                                    if ([muffin.songType isEqualToString:@"2"])
+                                                   {
                                                        self->hasTextData = YES;
-                                                   
+                                                       
+                                                       self->curSongWords = muffin.songWord;
+                                                   }
                                                    [self->arrPartAsk addObject:muffin];
                                                }
                                                [self.tblJoinList reloadData];
@@ -1629,6 +1634,9 @@
         UIWindow *window = UIApplication.sharedApplication.delegate.window;
         
         [window.rootViewController presentViewController:player animated:YES completion:nil];
+        // escdream 2020.04.03
+        songInfo.songWord = [curSongWords copy];
+
         player.songInfo = songInfo;
         [player setPlayList:arrList];
     }

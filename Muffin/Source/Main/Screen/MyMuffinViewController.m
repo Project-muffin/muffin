@@ -24,6 +24,7 @@
     NSMutableArray * arrMuffin;
     UIButton * mButton;
     SongTableViewCell *playCell;
+    UIButton * btnPlayAll;
 }
 
 @end
@@ -126,10 +127,35 @@
     if (section == 0)
     {
         lb.text = @"Muffin List";
+        
+        btnPlayAll = [UIButton buttonWithType:UIButtonTypeCustom];
+        btnPlayAll.imageEdgeInsets = UIEdgeInsetsMake(105, 20, 10, 20);
+        [btnPlayAll setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+        r.origin.x = r.size.width -  70;
+        r.size.width= 70;
+        btnPlayAll.frame = r;
+        btnPlayAll.tag = 1;
+        [btnPlayAll addTarget:self action:@selector(onListPlayClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [view addSubview:btnPlayAll];
+        
     }
     
     return view;
+}
 
+- (void) onListPlayClick:(UIButton *)btn
+{
+    if (btn.tag == 1)
+    {
+        btn.tag = 0;
+        [btn setImage:[UIImage imageNamed:@"Pause.png"] forState:UIControlStateNormal];
+    }
+    else
+    {
+        btn.tag = 1;
+        [btn setImage:[UIImage imageNamed:@"Play.png"] forState:UIControlStateNormal];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
